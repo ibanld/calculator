@@ -26,15 +26,49 @@ export default function Calculator() {
 		setDisplayNumber('0');
 	};
 
-	const handleEqual = () => {
-		setCalcState({
-			...calcState,
-			result: parseInt(calcState.firstNumber + calcState.operation + calcState.secondNumber)
-		});
+	const handleSign = (op) => {
+		switch (op) {
+			case '/':
+				setCalcState({
+					...calcState,
+					result: calcState.firstNumber / calcState.secondNumber
+				});
+				break;
+
+			case '*':
+				setCalcState({
+					...calcState,
+					result: calcState.firstNumber * calcState.secondNumber
+				});
+				break;
+
+			case '+':
+				setCalcState({
+					...calcState,
+					result: calcState.firstNumber + calcState.secondNumber
+				});
+				break;
+
+			case '-':
+				setCalcState({
+					...calcState,
+					result: calcState.firstNumber - calcState.secondNumber
+				});
+				break;
+
+			default:
+				setCalcState({ ...calcState });
+				break;
+		}
 		setDisplayNumber(calcState.result);
 	};
 
+	const handleEqual = () => {
+		handleSign(calcState.operation);
+	};
+
 	console.log(calcState);
+	console.log(displayNumber);
 
 	return (
 		<div className='container'>
@@ -51,6 +85,7 @@ export default function Calculator() {
 						setDisplayNumber={setDisplayNumber}
 						setCalcState={setCalcState}
 						calcState={calcState}
+						handleSign={handleSign}
 					/>
 					<Button
 						id='multiply'
@@ -59,6 +94,7 @@ export default function Calculator() {
 						setDisplayNumber={setDisplayNumber}
 						setCalcState={setCalcState}
 						calcState={calcState}
+						handleSign={handleSign}
 					/>
 					<Button
 						id='seven'
@@ -91,6 +127,7 @@ export default function Calculator() {
 						setDisplayNumber={setDisplayNumber}
 						setCalcState={setCalcState}
 						calcState={calcState}
+						handleSign={handleSign}
 					/>
 					<Button
 						id='four'
@@ -123,6 +160,7 @@ export default function Calculator() {
 						setDisplayNumber={setDisplayNumber}
 						setCalcState={setCalcState}
 						calcState={calcState}
+						handleSign={handleSign}
 					/>
 					<Button
 						id='one'
@@ -158,6 +196,7 @@ export default function Calculator() {
 						setDisplayNumber={setDisplayNumber}
 						setCalcState={setCalcState}
 						calcState={calcState}
+						handleSign={handleSign}
 					/>
 					<Button
 						id='zero'
