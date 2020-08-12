@@ -204,3 +204,21 @@
 	grid-row-start: 4;
 	grid-row-end: 6;
 }
+
+@media (max-width: 770px) {
+	#calculator {
+		min-width: 30%;
+	}
+}
+
+@media (max-width: 500px) {
+	#calculator {
+		min-width: 40%;
+	}
+}
+
+@media (max-width: 400px) {
+	#calculator {
+		min-width: 50%;
+	}
+}
