@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Screen from './ScreenComponent';
 import Button from './ButtonsComponent';
+import useSound from 'use-sound';
+import key from '../paddle.mp3'
 
 export default function Calculator() {
 	const [ calcState, setCalcState ] = useState({
@@ -13,6 +15,8 @@ export default function Calculator() {
 	});
 
 	const [ displayNumber, setDisplayNumber ] = useState('0');
+
+	const [play] = useSound(key)
 
 	const clearCalc = () => {
 		setCalcState({
@@ -51,22 +55,29 @@ export default function Calculator() {
 	};
 
 	const handleEqual = () => {
-		setCalcState({
-			...calcState,
-			secondNumber: parseFloat(displayNumber),
-			result: handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber))
-		});
-		setDisplayNumber(
-			(Math.round(handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber)) * 1000000) /
-				1000000).toString()
-		);
+		
+			setCalcState({
+				...calcState,
+				firstNumber: handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber)),
+				secondNumber: parseFloat(displayNumber),
+				result: handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber)),
+				firstIntroduced: false,
+				secondIntroduced: true
+			});
+			setDisplayNumber(
+				(Math.round(handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber)) * 1000000) /
+					1000000).toString()
+			);
+		
 	};
+
+	console.log(calcState)
 	return (
 		<div className='container'>
 			<div id='calculator'>
 				<Screen displayNumber={displayNumber} calcState={calcState} />
 				<div id='btn-grid'>
-					<button className='btn' id='clear' onClick={() => clearCalc()}>
+					<button className='btn' id='clear' onClick={() => {clearCalc(); play();}}>
 						<i className='fas fa-backspace' />
 					</button>
 					<Button
@@ -181,7 +192,7 @@ export default function Calculator() {
 						setCalcState={setCalcState}
 						calcState={calcState}
 					/>
-					<button className='btn' id='equals' onClick={() => handleEqual()}>
+					<button className='btn' id='equals' onClick={() => {handleEqual(); play();}}>
 						<i className='fas fa-equals' />
 					</button>
 
