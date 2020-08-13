@@ -71,7 +71,6 @@ export default function Calculator() {
 		
 	};
 
-	console.log(calcState)
 	return (
 		<div className='container'>
 			<div id='calculator'>

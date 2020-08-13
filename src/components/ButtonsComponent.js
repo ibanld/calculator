@@ -3,7 +3,7 @@ import useSound from 'use-sound';
 import key from '../paddle.mp3'
 
 export default function Button(props) {
-	const { fas, number, displayNumber, setDisplayNumber, calcState, setCalcState, handleSign, handleEqual } = props;
+	const { fas, number, displayNumber, setDisplayNumber, calcState, setCalcState, handleSign } = props;
 	const [play] = useSound(key)
 
 	const handleOperation = (fas) => {
