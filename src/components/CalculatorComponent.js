@@ -26,50 +26,41 @@ export default function Calculator() {
 		setDisplayNumber('0');
 	};
 
-	const handleSign = (op) => {
+	const handleSign = (num1, op, num2) => {
 		switch (op) {
 			case '/':
-				setCalcState({
-					...calcState,
-					result: calcState.firstNumber / calcState.secondNumber
-				});
+				return num1 / num2;
 				break;
 
 			case '*':
-				setCalcState({
-					...calcState,
-					result: calcState.firstNumber * calcState.secondNumber
-				});
+				return num1 * num2;
 				break;
 
 			case '+':
-				setCalcState({
-					...calcState,
-					result: calcState.firstNumber + calcState.secondNumber
-				});
+				return num1 + num2;
 				break;
 
 			case '-':
-				setCalcState({
-					...calcState,
-					result: calcState.firstNumber - calcState.secondNumber
-				});
+				return num1 - num2;
 				break;
 
 			default:
-				setCalcState({ ...calcState });
+				return num1 + num2;
 				break;
 		}
-		setDisplayNumber(calcState.result);
 	};
 
 	const handleEqual = () => {
-		handleSign(calcState.operation);
+		setCalcState({
+			...calcState,
+			secondNumber: parseFloat(displayNumber),
+			result: handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber))
+		});
+		setDisplayNumber(
+			(Math.round(handleSign(calcState.firstNumber, calcState.operation, parseFloat(displayNumber)) * 1000000) /
+				1000000).toString()
+		);
 	};
-
-	console.log(calcState);
-	console.log(displayNumber);
-
 	return (
 		<div className='container'>
 			<div id='calculator'>
@@ -86,6 +77,7 @@ export default function Calculator() {
 						setCalcState={setCalcState}
 						calcState={calcState}
 						handleSign={handleSign}
+						handleEqual={handleEqual}
 					/>
 					<Button
 						id='multiply'
@@ -95,6 +87,7 @@ export default function Calculator() {
 						setCalcState={setCalcState}
 						calcState={calcState}
 						handleSign={handleSign}
+						handleEqual={handleEqual}
 					/>
 					<Button
 						id='seven'
@@ -128,6 +121,7 @@ export default function Calculator() {
 						setCalcState={setCalcState}
 						calcState={calcState}
 						handleSign={handleSign}
+						handleEqual={handleEqual}
 					/>
 					<Button
 						id='four'
@@ -161,6 +155,7 @@ export default function Calculator() {
 						setCalcState={setCalcState}
 						calcState={calcState}
 						handleSign={handleSign}
+						handleEqual={handleEqual}
 					/>
 					<Button
 						id='one'
@@ -189,15 +184,15 @@ export default function Calculator() {
 					<button className='btn' id='equals' onClick={() => handleEqual()}>
 						<i className='fas fa-equals' />
 					</button>
-					<Button
+
+					<button
+						className='btn'
 						id='percent'
-						fas='percent'
-						displayNumber={displayNumber}
-						setDisplayNumber={setDisplayNumber}
-						setCalcState={setCalcState}
-						calcState={calcState}
-						handleSign={handleSign}
-					/>
+						onClick={() => console.log('Developed and Designed by Ibán López')}
+					>
+						<i className='fas fa-percent' />
+					</button>
+
 					<Button
 						id='zero'
 						number={0}

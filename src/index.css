@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,6 +8,7 @@
 	--secondary: #84a9ac;
 	--light: #e7dfd5;
 	--dark: #3b6978;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
 .container {
@@ -71,7 +74,7 @@
 	display: inline-block;
 	cursor: pointer;
 	color: #666666;
-	font-family: Arial;
+	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 15px;
 	font-weight: bold;
 	text-decoration: none;
